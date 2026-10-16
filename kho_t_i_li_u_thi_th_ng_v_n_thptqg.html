@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kho Tài Liệu & Đề Thi Thử Ngữ Văn THPTQG - Học Văn Cùng Đã Ném Cô Giáo Nga</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Inter & Playfair Display -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                            950: '#020617',
+                        },
+                        emeraldCustom: {
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        amberCustom: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-navy-950 text-slate-800 dark:text-slate-100 font-sans antialiased transition-colors duration-300 min-h-screen flex flex-col">
+
+    <!-- HEADER & NAVBAR -->
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-navy-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-600 to-emeraldCustom-500 flex items-center justify-center text-white shadow-md">
+                        <i class="fa-solid fa-book-open"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-lg leading-none block dark:text-white">Kho Văn THPT</span>
+                        <span class="text-[10px] font-semibold text-emeraldCustom-600 dark:text-emerald-400 tracking-wider uppercase">Đã Ném Cô Giáo Nga</span>
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center gap-6 font-medium text-sm text-slate-600 dark:text-slate-300">
+                    <a href="#kho-tai-lieu" class="hover:text-emeraldCustom-600 dark:hover:text-emerald-400 transition-colors">Kho Tài Liệu</a>
+                    <a href="#de-thi-thu" class="hover:text-emeraldCustom-600 dark:hover:text-emerald-400 transition-colors">Đề Thi Thử</a>
+                    <a href="#cong-thuc" class="hover:text-emeraldCustom-600 dark:hover:text-emerald-400 transition-colors">Công Thức Viết Văn</a>
+                    <a href="#yeu-thich" class="hover:text-emeraldCustom-600 dark:hover:text-emerald-400 transition-colors flex items-center gap-1">
+                        <i class="fa-solid fa-bookmark text-amberCustom-500"></i> Bài Đã Lưu (<span id="saved-count">0</span>)
+                    </a>
+                </nav>
+
+                <!-- Actions: Dark Mode & Mobile Menu -->
+                <div class="flex items-center gap-3">
+                    <button id="theme-toggle" aria-label="Toggle Dark Mode" class="p-2.5 rounded-xl bg-slate-100 dark:bg-navy-800 text-slate-600 dark:text-amber-400 hover:opacity-80 transition-all">
+                        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon text-lg hidden"></i>
+                        <i id="theme-toggle-light-icon" class="fa-solid fa-sun text-lg hidden"></i>
+                    </button>
+
+                    <button id="mobile-menu-btn" aria-label="Toggle Navigation" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-navy-900 border-b border-slate-200 dark:border-slate-800 px-4 pt-3 pb-4 space-y-2 text-sm font-medium">
+            <a href="#kho-tai-lieu" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emeraldCustom-600">Kho Tài Liệu</a>
+            <a href="#de-thi-thu" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emeraldCustom-600">Đề Thi Thử</a>
+            <a href="#cong-thuc" class="block py-2 text-slate-700 dark:text-slate-200 hover:text-emeraldCustom-600">Công Thức Viết Văn</a>
+            <a href="#yeu-thich" class="block py-2 text-amber-600 dark:text-amber-400 font-semibold">Tài Liệu Đã Lưu (<span id="mobile-saved-count">0</span>)</a>
+        </div>
+    </header>
+
+    <!-- HERO & SEARCH SECTION -->
+    <section class="bg-gradient-to-b from-indigo-50/50 via-white to-slate-50 dark:from-navy-900 dark:via-navy-950 dark:to-navy-950 py-12 lg:py-16 border-b border-slate-200/60 dark:border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emeraldCustom-700 dark:text-emerald-300 text-xs font-semibold mb-4">
+                <i class="fa-solid fa-graduation-cap"></i> Mở khóa kho tài liệu ôn thi hoàn toàn miễn phí
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-serif font-bold text-slate-900 dark:text-white leading-tight mb-4">
+                Tra Cứu Tài Liệu & Đề Thi Thử <br><span class="text-emeraldCustom-600 dark:text-emerald-400">Ngữ Văn THPT Quốc Gia</span>
+            </h1>
+            <p class="text-slate-600 dark:text-slate-400 text-sm sm:text-base max-w-2xl mx-auto mb-8">
+                Tổng hợp sơ đồ tư duy, dàn ý tác phẩm trọng tâm, bộ mở - kết bài mẫu và hệ thống đề thi thử có đáp án chi tiết.
+            </p>
+
+            <!-- Search Bar & Filters -->
+            <div class="bg-white dark:bg-navy-900 rounded-2xl p-4 shadow-xl border border-slate-200/80 dark:border-slate-800 max-w-3xl mx-auto text-left space-y-3">
+                <div class="relative">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                    <input type="text" id="search-input" onkeyup="filterDocs()" placeholder="Nhập tên tác phẩm (Vợ Nhặt, Sóng, Tây Tiến...), chủ đề hoặc loại tài liệu..." class="w-full pl-11 pr-4 py-3 bg-slate-50 dark:bg-navy-800 rounded-xl border border-slate-200 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emeraldCustom-500 text-sm text-slate-800 dark:text-slate-100 placeholder-slate-400">
+                </div>
+
+                <!-- Filter Tags -->
+                <div class="flex flex-wrap items-center gap-2 pt-1 text-xs">
+                    <span class="text-slate-400 font-medium mr-1"><i class="fa-solid fa-filter"></i> Lọc:</span>
+                    
+                    <!-- Grade filter -->
+                    <select id="filter-grade" onchange="filterDocs()" class="bg-slate-100 dark:bg-navy-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-emeraldCustom-500">
+                        <option value="all">Tất cả Khối Lớp</option>
+                        <option value="12">Lớp 12</option>
+                        <option value="11">Lớp 11</option>
+                        <option value="10">Lớp 10</option>
+                    </select>
+
+                    <!-- Category filter -->
+                    <select id="filter-type" onchange="filterDocs()" class="bg-slate-100 dark:bg-navy-800 border border-slate-200 dark:border-slate-700 rounded-lg px-2.5 py-1.5 font-medium text-slate-700 dark:text-slate-300 focus:outline-none focus:ring-1 focus:ring-emeraldCustom-500">
+                        <option value="all">Tất cả Loại tài liệu</option>
+                        <option value="sodo">Sơ đồ tư duy</option>
+                        <option value="dan-y">Dàn ý chi tiết</option>
+                        <option value="phan-tich">Bài văn mẫu / Phân tích</option>
+                        <option value="meo">Mẹo làm bài / Mở kết bài</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DOCUMENT REPOSITORY SECTION -->
+    <section id="kho-tai-lieu" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Kho Tài Liệu Học Tập</h2>
+                <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Danh sách các tài liệu trọng tâm cho kỳ thi THPTQG</p>
+            </div>
+            <span id="results-count" class="text-xs font-semibold text-emeraldCustom-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-3 py-1.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+                Hiển thị 6 tài liệu
+            </span>
+        </div>
+
+        <!-- Document Grid -->
+        <div id="docs-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Dynamic Content populated via JS -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="no-results" class="hidden text-center py-16">
+            <i class="fa-solid fa-folder-open text-4xl text-slate-300 dark:text-slate-700 mb-3"></i>
+            <p class="text-slate-500 dark:text-slate-400 font-medium">Không tìm thấy tài liệu phù hợp với tìm kiếm của bạn.</p>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE EXAM / QUIZ SECTION -->
+    <section id="de-thi-thu" class="py-12 bg-slate-100 dark:bg-navy-900/50 border-y border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-10">
+                <span class="text-xs font-bold text-amberCustom-500 tracking-wider uppercase">Luyện tập thực chiến</span>
+                <h2 class="text-3xl font-serif font-bold text-slate-900 dark:text-white mt-1">Luyện Đề Thi Thử Tương Tác</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-sm mt-2">Thử sức với bộ câu hỏi đọc hiểu chọn lọc & các đề thi thử phong cách mới.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                <!-- Interactive Multiple-Choice Reading Quiz (7 cols) -->
+                <div class="lg:col-span-7 bg-white dark:bg-navy-900 rounded-2xl shadow-lg border border-slate-200 dark:border-slate-800 p-6 sm:p-8">
+                    <div class="flex justify-between items-center pb-4 mb-6 border-b border-slate-100 dark:border-slate-800">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-pen-ruler text-emeraldCustom-500"></i>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-base">Trắc Nghiệm Đọc Hiểu & Văn Học</h3>
+                        </div>
+                        <span id="quiz-progress" class="text-xs font-semibold bg-indigo-50 dark:bg-navy-800 text-indigo-600 dark:text-indigo-400 px-2.5 py-1 rounded-md">
+                            Câu 1/3
+                        </span>
+                    </div>
+
+                    <!-- Quiz Content -->
+                    <div id="quiz-box">
+                        <p id="quiz-passage" class="text-xs italic bg-slate-50 dark:bg-navy-800 p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 mb-4 leading-relaxed">
+                            Loading passage...
+                        </p>
+                        <h4 id="quiz-question" class="font-bold text-slate-800 dark:text-slate-100 text-sm sm:text-base mb-4">Loading question...</h4>
+
+                        <div id="quiz-options" class="space-y-2.5">
+                            <!-- Dynamic Options -->
+                        </div>
+
+                        <div id="quiz-explanation" class="hidden mt-4 p-3.5 rounded-xl text-xs leading-relaxed font-medium"></div>
+
+                        <div class="mt-6 flex justify-between items-center">
+                            <span id="quiz-score" class="text-xs font-semibold text-slate-500 dark:text-slate-400">Điểm hiện tại: 0</span>
+                            <button id="quiz-next-btn" onclick="nextQuizQuestion()" class="hidden bg-emeraldCustom-600 hover:bg-emeraldCustom-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl transition-all">
+                                Câu tiếp theo <i class="fa-solid fa-arrow-right ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Final State -->
+                    <div id="quiz-final" class="hidden text-center py-8 space-y-4">
+                        <div class="w-16 h-16 bg-emerald-100 dark:bg-emerald-950 text-emeraldCustom-600 dark:text-emerald-400 rounded-full flex items-center justify-center text-3xl mx-auto">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-slate-900 dark:text-white">Hoàn thành bài luyện tập!</h4>
+                        <p id="quiz-final-score" class="text-sm text-slate-600 dark:text-slate-300">Bạn đã trả lời đúng 3/3 câu.</p>
+                        <button onclick="resetQuiz()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-6 py-3 rounded-xl transition-all">
+                            Làm lại bài luyện tập
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Essay Exam Downloads & Matrices (5 cols) -->
+                <div class="lg:col-span-5 space-y-4">
+                    <h3 class="font-serif font-bold text-lg text-slate-900 dark:text-white mb-2 flex items-center gap-2">
+                        <i class="fa-solid fa-file-pdf text-red-500"></i> Đề Thi Thử Tự Luận Có Đáp Án
+                    </h3>
+
+                    <!-- Exam Item 1 -->
+                    <div class="bg-white dark:bg-navy-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:shadow-md transition-all">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-emeraldCustom-600 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded">
+                                Cấu trúc chuẩn 2026
+                            </span>
+                            <span class="text-xs text-slate-400">120 Phút</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">Đề thi thử THPTQG Số 01 - Đồ thị cảm xúc & Tác phẩm Vợ Nhặt</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Kèm ma trận đề, hướng dẫn chấm & đáp án chi tiết bài NLXH 200 chữ.</p>
+                        <div class="flex gap-2">
+                            <button onclick="previewExam('Đề số 01', 'Đề thi thử THPTQG Số 01', 'https://placehold.co/600x800/1e293b/ffffff?text=De+Thi+Thu+So+1+PDF')" class="flex-1 bg-slate-100 hover:bg-slate-200 dark:bg-navy-800 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-200 text-xs font-medium py-2 rounded-lg text-center transition-all">
+                                <i class="fa-solid fa-eye mr-1"></i> Xem Đề
+                            </button>
+                            <button onclick="showMatrixModal('Đề Số 01: Vợ Nhặt', 'Đọc hiểu: Đoạn trích thơ hiện đại (3đ)\nNLXH: Lối sống cống hiến âm thầm của giới trẻ (2đ)\nNLVH: Phân tích hình tượng nhân vật Tràng trong cảnh nhặt vợ (5đ)')" class="flex-1 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-emeraldCustom-700 dark:text-emerald-300 text-xs font-medium py-2 rounded-lg text-center transition-all">
+                                <i class="fa-solid fa-table-cells mr-1"></i> Xem Ma Trận
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Exam Item 2 -->
+                    <div class="bg-white dark:bg-navy-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 hover:shadow-md transition-all">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 dark:bg-navy-800 px-2 py-0.5 rounded">
+                                Đề thi thử Chuyên Sư Phạm
+                            </span>
+                            <span class="text-xs text-slate-400">120 Phút</span>
+                        </div>
+                        <h4 class="font-bold text-sm text-slate-800 dark:text-slate-100 mb-1">Đề thi thử Số 02 - Tác phẩm Chiếc Thuyền Ngoài Xa & Bài học cuộc sống</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Đề phân hóa cao dành cho học sinh mục tiêu 8.5+ Ngữ Văn.</p>
+                        <div class="flex gap-2">
+                            <button onclick="previewExam('Đề số 02', 'Đề thi thử Chuyên Sư Phạm', 'https://placehold.co/600x800/0f172a/ffffff?text=De+Thi+Thu+So+2+PDF')" class="flex-1 bg-slate-100 hover:bg-slate-200 dark:bg-navy-800 dark:hover:bg-navy-700 text-slate-700 dark:text-slate-200 text-xs font-medium py-2 rounded-lg text-center transition-all">
+                                <i class="fa-solid fa-eye mr-1"></i> Xem Đề
+                            </button>
+                            <button onclick="showMatrixModal('Đề Số 02: Chiếc Thuyền Ngoài Xa', 'Đọc hiểu: Văn bản nghị luận xã hội về góc nhìn đa chiều (3đ)\nNLXH: Ý nghĩa của cái nhìn bao dung trong cuộc sống (2đ)\nNLVH: Phát hiện thứ hai của người nghệ sĩ Phùng và bài học nhân sinh (5đ)')" class="flex-1 bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900 text-emeraldCustom-700 dark:text-emerald-300 text-xs font-medium py-2 rounded-lg text-center transition-all">
+                                <i class="fa-solid fa-table-cells mr-1"></i> Xem Ma Trận
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WRITING FORMULAS & TIPS SECTION -->
+    <section id="cong-thuc" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="mb-8">
+            <h2 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Công Thức Viết Văn & Dẫn Chứng NLXH</h2>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Tổng hợp mẹo viết mở bài, kết bài và sơ đồ lập luận chuẩn điểm cao</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <!-- Box 1: Mở bài dùng chung -->
+            <div class="bg-white dark:bg-navy-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-100 dark:bg-amber-950 text-amberCustom-500 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-pen-nib"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base">Mẫu Mở Bài Dùng Chung</h3>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed italic bg-slate-50 dark:bg-navy-800 p-3 rounded-xl border border-slate-100 dark:border-slate-700">
+                    "Thời gian vẫn gõ nhịp đều đặn qua từng kẽ tay, làm mờ đi biết bao dấu vết của quá khứ. Thế nhưng, có những tác phẩm văn học vẫn vẹn nguyên giá trị..."
+                </p>
+                <button onclick="copyFormula('Thời gian vẫn gõ nhịp đều đặn qua từng kẽ tay, làm mờ đi biết bao dấu vết của quá khứ. Thế nhưng, có những tác phẩm văn học vẫn vẹn nguyên giá trị và neo đậu lại trong lòng người đọc nhờ vẻ đẹp của [Tên tác phẩm / Tác giả]')" class="text-xs font-semibold text-emeraldCustom-600 hover:text-emeraldCustom-700 flex items-center gap-1">
+                    <i class="fa-regular fa-copy"></i> Sao chép mẫu đầy đủ
+                </button>
+            </div>
+
+            <!-- Box 2: Công thức NLXH -->
+            <div class="bg-white dark:bg-navy-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-navy-800 text-indigo-600 dark:text-indigo-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-lightbulb"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base">Công Thức Đoạn Văn NLXH 200 Chữ</h3>
+                <ul class="text-xs text-slate-600 dark:text-slate-300 space-y-2 list-disc pl-4">
+                    <li><strong>Mở đoạn (1 câu):</strong> Giới thiệu trực tiếp vấn đề cần nghị luận.</li>
+                    <li><strong>Giải thích (1-2 câu):</strong> Định nghĩa ngắn gọn từ khóa chính.</li>
+                    <li><strong>Bàn luận (3-4 câu):</strong> Tại sao vấn đề này quan trọng? Lợi ích/Hậu quả.</li>
+                    <li><strong>Dẫn chứng (2 câu):</strong> Người thật, việc thật mang tính thời sự.</li>
+                    <li><strong>Bài học (1-2 câu):</strong> Liên hệ bản thân cụ thể.</li>
+                </ul>
+            </div>
+
+            <!-- Box 3: Dẫn chứng NLXH đắt giá -->
+            <div class="bg-white dark:bg-navy-900 rounded-2xl p-6 border border-slate-200 dark:border-slate-800 space-y-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emeraldCustom-600 dark:text-emerald-400 flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-quote-left"></i>
+                </div>
+                <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base">Dẫn Chứng NLXH Thời Sự</h3>
+                <div class="space-y-2 text-xs">
+                    <div class="p-2.5 bg-slate-50 dark:bg-navy-800 rounded-lg">
+                        <strong class="text-slate-800 dark:text-slate-200 block">Ý chí vượt khó:</strong>
+                        <span class="text-slate-500 dark:text-slate-400">Vận động viên Nguyễn Thị Oanh đoạt 4 HCV Điền kinh SEA Games trong điều kiện thi đấu khắc nghiệt.</span>
+                    </div>
+                    <div class="p-2.5 bg-slate-50 dark:bg-navy-800 rounded-lg">
+                        <strong class="text-slate-800 dark:text-slate-200 block">Sự tử tế & Cống hiến:</strong>
+                        <span class="text-slate-500 dark:text-slate-400">Dự án "Nâng bước em đến trường" giúp hàng ngàn trẻ em vùng cao có cơ hội đi học.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BOOKMARKED DOCUMENTS SECTION -->
+    <section id="yeu-thich" class="py-12 bg-slate-100 dark:bg-navy-900/40 border-t border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center gap-2 mb-6">
+                <i class="fa-solid fa-bookmark text-amberCustom-500 text-xl"></i>
+                <h2 class="text-2xl font-serif font-bold text-slate-900 dark:text-white">Tài Liệu Đã Lưu Ôn Tập</h2>
+            </div>
+            
+            <div id="saved-docs-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Saved items populated dynamically -->
+            </div>
+
+            <div id="no-saved-docs" class="text-center py-10 bg-white dark:bg-navy-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-700">
+                <p class="text-xs text-slate-500 dark:text-slate-400">Bạn chưa lưu tài liệu nào. Bấm vào biểu tượng bookmark trên mỗi tài liệu để xem lại sau nhé!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 dark:bg-navy-950 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
+            <div>
+                <p class="font-bold text-white text-sm">Kho Tài Liệu & Đề Thi Thử Ngữ Văn THPTQG</p>
+                <p class="text-slate-500 mt-0.5">Xây dựng dựa trên cảm hứng từ Học Văn Cùng Đã Ném Cô Giáo Nga - Phi lợi nhuận.</p>
+            </div>
+            <p class="text-slate-500">&copy; 2026 Học Văn THPT. Chúc các sĩ tử ôn thi đạt kết quả cao nhất!</p>
+        </div>
+    </footer>
+
+    <!-- MODAL: DOCUMENT VIEW / PREVIEW -->
+    <div id="doc-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-navy-900 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] flex flex-col border border-slate-200 dark:border-slate-800">
+            <div class="p-5 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center">
+                <h3 id="modal-title" class="font-serif font-bold text-lg text-slate-900 dark:text-white">Chi tiết tài liệu</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div id="modal-body" class="p-6 overflow-y-auto custom-scrollbar text-sm text-slate-700 dark:text-slate-300 leading-relaxed space-y-4">
+                <!-- Modal Detail Content -->
+            </div>
+            <div class="p-4 border-t border-slate-200 dark:border-slate-800 flex justify-end gap-3 bg-slate-50 dark:bg-navy-950 rounded-b-2xl">
+                <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-200 dark:bg-navy-800 text-slate-700 dark:text-slate-300 text-xs font-semibold">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // DARK MODE TOGGLE LOGIC
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleBtn = document.getElementById('theme-toggle');
+
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            document.documentElement.classList.remove('dark');
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleBtn.addEventListener('click', function() {
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // MOBILE MENU TOGGLE
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // SAMPLE REPOSITORY DATA
+        const documents = [
+            {
+                id: 'doc-1',
+                title: 'Sơ đồ tư duy & Phân tích chi tiết tác phẩm Vợ Nhặt',
+                author: 'Kim Lân',
+                grade: '12',
+                type: 'sodo',
+                typeName: 'Sơ đồ tư duy',
+                desc: 'Phân tích nhân vật Tràng, cô thị và bà cụ Tứ qua đồ thị diễn biến tâm lý sắc nét.',
+                content: `
+                    <h4 class="font-bold text-base mb-2">I. Tóm tắt cốt truyện & Bối cảnh</h4>
+                    <p class="mb-3">Tác phẩm lấy bối cảnh nạn đói khủng khiếp năm 1945. Giữa ranh giới cái chết, Tràng - một gã nghèo kéo xe bò thuê - đã "nhặt" được vợ chỉ bằng 4 bát bánh đúc và vài câu hò đùa vui.</p>
+                    <h4 class="font-bold text-base mb-2">II. Giá trị Nhân đạo sâu sắc</h4>
+                    <ul class="list-disc pl-5 space-y-1 mb-3">
+                        <li>Tố cáo tội ác của phát xít Nhật và thực dân Pháp.</li>
+                        <li>Ca ngợi tình người đùm bọc giữa chốn bần cùng.</li>
+                        <li>Khát vọng sống mãnh liệt và niềm tin hướng về tương lai tươi sáng (hình ảnh lá cờ đỏ sao vàng).</li>
+                    </ul>
+                `
+            },
+            {
+                id: 'doc-2',
+                title: 'Dàn ý chi tiết bài thơ Tây Tiến - Vẻ đẹp bi hùng của người lính',
+                author: 'Quang Dũng',
+                grade: '12',
+                type: 'dan-y',
+                typeName: 'Dàn ý chi tiết',
+                desc: 'Dàn ý phân tích bức tranh thiên nhiên Tây Bắc hùng vĩ và hình tượng đoàn quân Tây Tiến.',
+                content: `
+                    <h4 class="font-bold text-base mb-2">I. Thiên nhiên Tây Bắc vần điệu hùng vĩ</h4>
+                    <p class="mb-3">"Sài Môn lấp đoàn quân mệt mỏi / Mường Lát hoa về trong đêm hơi" - Bức tranh thiên nhiên vừa hiểm trở vừa thơ mộng.</p>
+                    <h4 class="font-bold text-base mb-2">II. Bức chân dung người lính Tây Tiến</h4>
+                    <p class="mb-3">"Tây Tiến đoàn binh không mọc tóc / Quân xanh màu lá dữ oai hùm" - Vẻ đẹp lãng mạn hòa quyện cùng cái nhìn bi hùng không né tránh gian khổ.</p>
+                `
+            },
+            {
+                id: 'doc-3',
+                title: 'Bộ Mở Bài & Kết Bài dùng chung cho văn Nghị luận văn học',
+                author: 'Cô Nga tổng hợp',
+                grade: '12',
+                type: 'meo',
+                typeName: 'Mẹo làm bài',
+                desc: '10 mẫu mở bài và kết bài ấn tượng, ứng dụng linh hoạt cho mọi bài thơ và tác phẩm văn xôi.',
+                content: `
+                    <h4 class="font-bold text-base mb-2">Mẫu Mở Bài Trực Tiếp & Gián Tiếp</h4>
+                    <p class="mb-3 bg-slate-100 dark:bg-navy-800 p-3 rounded-lg italic">"Nhà văn Nam Cao từng viết: 'Nghệ thuật không cần phải là ánh trăng lừa dối...' Đúng vậy, tác phẩm [Tên tác phẩm] của [Tên tác giả] đã phản ánh chân thực..."</p>
+                `
+            },
+            {
+                id: 'doc-4',
+                title: 'Phân tích hình tượng Sông Hương trong "Ai đã đặt tên cho dòng sông"',
+                author: 'Hoàng Phủ Ngọc Tường',
+                grade: '12',
+                type: 'phan-tich',
+                typeName: 'Bài văn mẫu',
+                desc: 'Vẻ đẹp thủy trình Sông Hương từ góc độ địa lý, lịch sử và văn hóa xứ Huế.',
+                content: `
+                    <h4 class="font-bold text-base mb-2">Thủy trình Sông Hương</h4>
+                    <p class="mb-3">Từ bản trường ca của rừng rậm Trường Sơn đến người tình dịu dàng và đằm thắm của xứ Huế mơ mộng.</p>
+                `
+            },
+            {
+                id: 'doc-5',
+                title: 'Sơ đồ tư duy bài thơ Sóng - Khát vọng tình yêu tuổi trẻ',
+                author: 'Xuân Quỳnh',
+                grade: '12',
+                type: 'sodo',
+                typeName: 'Sơ đồ tư duy',
+                desc: 'Hệ thống hình tượng sóng và em, sự tương đồng giữa nhịp sóng biển và nhịp tim người phụ nữ.',
+                content: `
+                    <h4 class="font-bold text-base mb-2">Kết cấu hình tượng Sóng & Em</h4>
+                    <p class="mb-3">Hai hình tượng song hành, soi chiếu cho nhau, thể hiện những cung bậc cảm xúc dữ dội và dịu êm trong tình yêu.</p>
+                `
+            },
+            {
+                id: 'doc-6',
+                title: 'Phân tích nhân vật Mị trong đêm đông cởi trói cho A Phủ',
+                author: 'Tô Hoài',
+                grade: '12',
+                type: 'phan-tich',
+                typeName: 'Bài văn mẫu',
+                desc: 'Diễn biến tâm lý từ dâng trào sức sống tiềm tàng đến hành động cởi trói mang tính bước ngoặt.',
+                content: `
+                    <h4 class="font-bold text-base mb-2">Sức sống tiềm tàng của Mị</h4>
+                    <p class="mb-3">Dòng nước mắt của A Phủ đã thức tỉnh lòng đồng cảm và tinh thần phản kháng quyết liệt ở nhân vật Mị.</p>
+                `
+            }
+        ];
+
+        // BOOKMARK / SAVED LOCAL STORAGE LOGIC
+        let savedDocIds = JSON.parse(localStorage.getItem('savedDocs')) || [];
+
+        function updateSavedCountUI() {
+            document.getElementById('saved-count').innerText = savedDocIds.length;
+            document.getElementById('mobile-saved-count').innerText = savedDocIds.length;
+            renderSavedDocs();
+        }
+
+        function toggleSaveDoc(docId) {
+            if (savedDocIds.includes(docId)) {
+                savedDocIds = savedDocIds.filter(id => id !== docId);
+            } else {
+                savedDocIds.push(docId);
+            }
+            localStorage.setItem('savedDocs', JSON.stringify(savedDocIds));
+            updateSavedCountUI();
+            renderDocsGrid(getFilteredDocs());
+        }
+
+        function renderSavedDocs() {
+            const container = document.getElementById('saved-docs-grid');
+            const emptyMsg = document.getElementById('no-saved-docs');
+
+            const savedItems = documents.filter(d => savedDocIds.includes(d.id));
+
+            if (savedItems.length === 0) {
+                container.innerHTML = '';
+                emptyMsg.classList.remove('hidden');
+            } else {
+                emptyMsg.classList.add('hidden');
+                container.innerHTML = savedItems.map(doc => `
+                    <div class="bg-white dark:bg-navy-900 rounded-2xl p-5 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] font-bold uppercase text-emeraldCustom-600 bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded">${doc.typeName}</span>
+                            <h4 class="font-bold text-slate-800 dark:text-slate-100 text-sm mt-2 mb-1">${doc.title}</h4>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">${doc.desc}</p>
+                        </div>
+                        <div class="mt-4 flex justify-between items-center pt-3 border-t border-slate-100 dark:border-slate-800">
+                            <button onclick="openModal('${doc.id}')" class="text-xs font-semibold text-emeraldCustom-600 dark:text-emerald-400 hover:underline">Xem ngay</button>
+                            <button onclick="toggleSaveDoc('${doc.id}')" class="text-red-500 text-xs font-medium hover:underline">Bỏ lưu</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // FILTER & RENDER REPOSITORY
+        function getFilteredDocs() {
+            const searchText = document.getElementById('search-input').value.toLowerCase().trim();
+            const selectedGrade = document.getElementById('filter-grade').value;
+            const selectedType = document.getElementById('filter-type').value;
+
+            return documents.filter(doc => {
+                const matchesSearch = doc.title.toLowerCase().includes(searchText) || 
+                                      doc.author.toLowerCase().includes(searchText) || 
+                                      doc.desc.toLowerCase().includes(searchText);
+                const matchesGrade = selectedGrade === 'all' || doc.grade === selectedGrade;
+                const matchesType = selectedType === 'all' || doc.type === selectedType;
+
+                return matchesSearch && matchesGrade && matchesType;
+            });
+        }
+
+        function filterDocs() {
+            const filtered = getFilteredDocs();
+            renderDocsGrid(filtered);
+        }
+
+        function renderDocsGrid(docsList) {
+            const grid = document.getElementById('docs-grid');
+            const noResults = document.getElementById('no-results');
+            document.getElementById('results-count').innerText = `Hiển thị ${docsList.length} tài liệu`;
+
+            if (docsList.length === 0) {
+                grid.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            grid.innerHTML = docsList.map(doc => {
+                const isSaved = savedDocIds.includes(doc.id);
+                return `
+                    <div class="bg-white dark:bg-navy-900 rounded-2xl p-6 border border-slate-200/80 dark:border-slate-800 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group">
+                        <div>
+                            <div class="flex justify-between items-start mb-3">
+                                <span class="text-[10px] font-bold uppercase tracking-wider text-emeraldCustom-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-1 rounded-md border border-emerald-100 dark:border-emerald-900">
+                                    ${doc.typeName} • Lớp ${doc.grade}
+                                </span>
+                                <button onclick="toggleSaveDoc('${doc.id}')" class="text-slate-300 dark:text-slate-600 hover:text-amberCustom-500 transition-colors p-1" title="Lưu tài liệu">
+                                    <i class="fa-solid fa-bookmark ${isSaved ? 'text-amberCustom-500' : ''}"></i>
+                                </button>
+                            </div>
+                            <h3 class="font-serif font-bold text-slate-900 dark:text-white text-base mb-2 group-hover:text-emeraldCustom-600 dark:group-hover:text-emerald-400 transition-colors">${doc.title}</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mb-4 line-clamp-3">${doc.desc}</p>
+                        </div>
+                        <div class="pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs">
+                            <span class="text-slate-400 font-medium"><i class="fa-solid fa-pen"></i> ${doc.author}</span>
+                            <button onclick="openModal('${doc.id}')" class="font-semibold text-emeraldCustom-600 dark:text-emerald-400 hover:text-emeraldCustom-700 flex items-center gap-1">
+                                Đọc chi tiết <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // MODAL FUNCTIONS
+        function openModal(docId) {
+            const doc = documents.find(d => d.id === docId);
+            if (!doc) return;
+
+            document.getElementById('modal-title').innerText = doc.title;
+            document.getElementById('modal-body').innerHTML = `
+                <div class="bg-slate-50 dark:bg-navy-800 p-3 rounded-xl border border-slate-200 dark:border-slate-700 text-xs mb-4">
+                    <strong>Tác giả / Nguồn:</strong> ${doc.author} | <strong>Khối Lớp:</strong> ${doc.grade}
+                </div>
+                ${doc.content}
+            `;
+            document.getElementById('doc-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('doc-modal').classList.add('hidden');
+        }
+
+        function showMatrixModal(title, matrixText) {
+            document.getElementById('modal-title').innerText = `Ma Trận Đề Thi: ${title}`;
+            document.getElementById('modal-body').innerHTML = `
+                <pre class="whitespace-pre-wrap font-sans text-xs bg-slate-50 dark:bg-navy-800 p-4 rounded-xl border border-slate-200 dark:border-slate-700 leading-relaxed">${matrixText}</pre>
+            `;
+            document.getElementById('doc-modal').classList.remove('hidden');
+        }
+
+        function previewExam(examNum, title, pdfPlaceholderUrl) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-body').innerHTML = `
+                <div class="text-center space-y-3">
+                    <img src="${pdfPlaceholderUrl}" alt="Đề thi" class="mx-auto rounded-lg border shadow-sm max-h-96 object-contain">
+                    <p class="text-xs text-slate-500">Bản xem trước đề thi thử chuẩn cấu trúc THPT Quốc Gia.</p>
+                </div>
+            `;
+            document.getElementById('doc-modal').classList.remove('hidden');
+        }
+
+        function copyFormula(text) {
+            navigator.clipboard.writeText(text);
+            alert('Đã sao chép mẫu bài viết vào bộ nhớ tạm!');
+        }
+
+        // INTERACTIVE QUIZ LOGIC
+        const quizData = [
+            {
+                passage: "Đọc đoạn trích: 'Sống trong đời sống cần có một tấm lòng / Để làm gì em biết không? / Để gió cuốn đi...' (Trịnh Công Sơn)",
+                question: "Thông điệp chính mà tác giả muốn gửi gắm qua đoạn trích trên là gì?",
+                options: [
+                    "Sự sẻ chia, yêu thương tử tế mà không đòi hỏi đền đáp",
+                    "Khuyên con người nên buông bỏ mọi hoài hoài hoài niệm",
+                    "Sự mong manh của kiếp người trước thiên nhiên",
+                    "Khuyên con người nên tích cực đi du lịch"
+                ],
+                correct: 0,
+                explanation: "'Tấm lòng để gió cuốn đi' biểu tượng cho tình yêu thương chân thành, vị tha ban phát cho đời mà không màng vụ lợi."
+            },
+            {
+                passage: "Tác phẩm 'Chiếc thuyền ngoài xa' - Nguyễn Minh Châu",
+                question: "Phát hiện thứ hai của nghệ sĩ Phùng ở bờ biển là gì?",
+                options: [
+                    "Bức tranh bình minh trên biển đẹp hoàn hảo",
+                    "Cảnh người chồng bạo lực đánh đập người đàn bà hàng chài dã man",
+                    "Cảnh chiếc thuyền bị lật sóng đánh chìm",
+                    "Cảnh chính quyền thu giữ thuyền đánh cá"
+                ],
+                correct: 1,
+                explanation: "Phát hiện thứ hai hiện thực đầy cay đắng: gã chồng vũ phu đánh đập vợ, đối lập hoàn toàn với vẻ đẹp thơ mộng ở phát hiện thứ nhất."
+            },
+            {
+                passage: "Bài thơ 'Sóng' - Xuân Quỳnh",
+                question: "Thảm trạng tâm trạng nào của người phụ nữ trong tình yêu được thể hiện qua hình tượng 'Sóng'?",
+                options: [
+                    "Sự lạnh nhạt và xa cách",
+                    "Nỗi nhớ nhung da diết cả trong mơ lẫn khi thức",
+                    "Sự giận dỗi trẻ con",
+                    "Khát vọng tự do cá nhân"
+                ],
+                correct: 1,
+                explanation: "'Lòng em nhớ đến anh / Cả trong mơ còn thức' thể hiện nỗi nhớ dào dạt, vượt qua cả không gian và thời gian."
+            }
+        ];
+
+        let currentQuizIdx = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+
+        function loadQuizQuestion() {
+            quizAnswered = false;
+            const q = quizData[currentQuizIdx];
+            document.getElementById('quiz-progress').innerText = `Câu ${currentQuizIdx + 1}/${quizData.length}`;
+            document.getElementById('quiz-passage').innerText = q.passage;
+            document.getElementById('quiz-question').innerText = q.question;
+
+            const optionsBox = document.getElementById('quiz-options');
+            optionsBox.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-emeraldCustom-500 hover:bg-emerald-50/50 dark:hover:bg-navy-800 transition-all text-xs font-medium text-slate-700 dark:text-slate-200 flex justify-between items-center";
+                btn.innerHTML = `<span>${opt}</span> <i class="fa-regular fa-circle text-slate-300"></i>`;
+                btn.onclick = () => checkQuizAnswer(idx, btn);
+                optionsBox.appendChild(btn);
+            });
+
+            document.getElementById('quiz-explanation').classList.add('hidden');
+            document.getElementById('quiz-next-btn').classList.add('hidden');
+        }
+
+        function checkQuizAnswer(selectedIdx, btn) {
+            if (quizAnswered) return;
+            quizAnswered = true;
+
+            const q = quizData[currentQuizIdx];
+            const explanationBox = document.getElementById('quiz-explanation');
+
+            if (selectedIdx === q.correct) {
+                quizScore++;
+                document.getElementById('quiz-score').innerText = `Điểm hiện tại: ${quizScore}`;
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-emeraldCustom-500 bg-emerald-50 dark:bg-emerald-950/60 text-emeraldCustom-800 dark:text-emerald-200 text-xs font-medium flex justify-between items-center";
+                btn.querySelector('i').className = "fa-solid fa-circle-check text-emeraldCustom-500";
+                
+                explanationBox.className = "mt-4 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-800 text-emeraldCustom-800 dark:text-emerald-300 text-xs leading-relaxed block";
+                explanationBox.innerHTML = `<strong>Chính xác!</strong> ${q.explanation}`;
+            } else {
+                btn.className = "w-full text-left p-3 rounded-xl border-2 border-red-500 bg-red-50 dark:bg-red-950/60 text-red-800 dark:text-red-200 text-xs font-medium flex justify-between items-center";
+                btn.querySelector('i').className = "fa-solid fa-circle-xmark text-red-500";
+
+                explanationBox.className = "mt-4 p-3 rounded-xl bg-red-50 dark:bg-red-950/50 border border-red-200 dark:border-red-900 text-red-800 dark:text-red-300 text-xs leading-relaxed block";
+                explanationBox.innerHTML = `<strong>Chưa đúng.</strong> ${q.explanation}`;
+            }
+
+            document.getElementById('quiz-next-btn').classList.remove('hidden');
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIdx++;
+            if (currentQuizIdx < quizData.length) {
+                loadQuizQuestion();
+            } else {
+                document.getElementById('quiz-box').classList.add('hidden');
+                document.getElementById('quiz-final').classList.remove('hidden');
+                document.getElementById('quiz-final-score').innerText = `Bạn đạt điểm số ${quizScore}/${quizData.length}.`;
+            }
+        }
+
+        function resetQuiz() {
+            currentQuizIdx = 0;
+            quizScore = 0;
+            document.getElementById('quiz-score').innerText = 'Điểm hiện tại: 0';
+            document.getElementById('quiz-final').classList.add('hidden');
+            document.getElementById('quiz-box').classList.remove('hidden');
+            loadQuizQuestion();
+        }
+
+        // INITIALIZATION
+        window.onload = function() {
+            renderDocsGrid(documents);
+            updateSavedCountUI();
+            loadQuizQuestion();
+        };
+    </script>
+</body>
+</html>
